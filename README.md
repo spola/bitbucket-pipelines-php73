@@ -7,10 +7,10 @@
 ### Packages installed
 
 - `php7.3-zip`, `php7.3-xml`, `php7.3-mbstring`, `php7.3-curl`, `php7.3-json`, `php7.3-imap`, `php7.3-mysql`, `php7.3-tokenizer`, `php7.3-xdebug`, `php7.3-intl`, `php7.3-soap`, `php7.3-pdo`, `php7.3-cli`, `php7.3-gd` and `php7.3-gmp`
-- wget, curl, unzip
+- wget, curl, unzip, gd
 - Composer
 - Mysql 5.7
-- Node + Yarn
+- Node + Yarn + npm
 
 ### Sample `bitbucket-pipelines.yml`
 
