@@ -42,6 +42,20 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     yarn \
+    git \
+    unzip \
+    mcrypt \
+    wget \
+    curl \
+    openssl \
+    ssh \
+    locales \
+    less \
+    composer \
+    sudo \
+    mysql-server \
+    npm \
+    libpng-dev \
     php-pear php7.3-mysql php7.3-zip php7.3-xml php7.3-mbstring php7.3-curl php7.3-json php7.3-pdo php7.3-tokenizer php7.3-cli php7.3-imap php7.3-intl php7.3-gd php7.3-xdebug php7.3-soap php7.3-gmp\
     apache2 libapache2-mod-php7.3 \
     --no-install-recommends && \
@@ -51,10 +65,20 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     rm /var/lib/mysql/ib_logfile*
 
+# Actualizar paquetes npm
+RUN npm install -g npm@latest
+
 # Ensure UTF-8
 ENV LANG       en_US.UTF-8
 ENV LC_ALL     en_US.UTF-8
 RUN locale-gen en_US.UTF-8
+
+#GD
+RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
+    --with-png-dir --with-zlib-dir --with-xpm-dir --with-freetype-dir \
+    --enable-gd-native-ttf
+
+RUN docker-php-ext-install gd
 
 # Timezone & memory limit
 RUN echo "date.timezone=Europe/Paris" > /etc/php/7.3/cli/conf.d/date_timezone.ini && echo "memory_limit=1G" >> /etc/php/7.3/apache2/php.ini
